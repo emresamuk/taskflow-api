@@ -1,0 +1,17 @@
+{
+  "info": {
+    "name": "Taskflow API",
+    "description": "Taskflow CRUD and validation requests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:3000" }, { "key": "taskId", "value": "replace-with-task-id" }],
+  "item": [
+    { "name": "Create task", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"Prepare release\",\n  \"description\": \"Complete API documentation\",\n  \"priority\": \"high\",\n  \"assignee\": \"Emre\",\n  \"status\": \"pending\"\n}" }, "url": "{{baseUrl}}/tasks" } },
+    { "name": "List tasks", "request": { "method": "GET", "url": "{{baseUrl}}/tasks" } },
+    { "name": "Get task detail", "request": { "method": "GET", "url": "{{baseUrl}}/tasks/{{taskId}}" } },
+    { "name": "Update task", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"status\": \"in-progress\",\n  \"priority\": \"medium\"\n}" }, "url": "{{baseUrl}}/tasks/{{taskId}}" } },
+    { "name": "Delete task", "request": { "method": "DELETE", "url": "{{baseUrl}}/tasks/{{taskId}}" } },
+    { "name": "Invalid ID", "request": { "method": "GET", "url": "{{baseUrl}}/tasks/not-a-real-id" } },
+    { "name": "Missing title (400)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"description\": \"This request must fail\"\n}" }, "url": "{{baseUrl}}/tasks" } }
+  ]
+}
